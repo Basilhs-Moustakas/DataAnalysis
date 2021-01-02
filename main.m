@@ -1,4 +1,5 @@
-clear all
+clear all;
+close all;
 % Deaths = readtable('Covid19Deaths.xlsx');
 % Confirmed = readtable('Covid19Confirmed.xlsx');
 Italy_deaths = load("italy_deaths.mat");
@@ -42,50 +43,48 @@ end
 figure
 bar(deaths_first_wave_array);
 title('Moufa Psofoi');
+figure
+bar(confirmed_first_wave_array);
+title('Moufa Gripes');
 
 data = 1:length(confirmed_first_wave_array);
 
 normalized_deaths = deaths_first_wave_array/sum2;
 
-%% Deaths - MSE
-temp1  = fitdist(data','generalized extreme value','frequency',deaths_first_wave_array);
-fitted_deaths_gen_ext_val = pdf(temp1,data);
-err_fitted_deaths_gev = immse(normalized_deaths,fitted_deaths_gen_ext_val);
+%% Deaths - RKVSG
 
-temp2 = fitdist(data','lognormal','frequency',deaths_first_wave_array);
-fitted_deaths_lognormal = pdf(temp2,data);
-err_fitted_deaths_lognormal = immse(normalized_deaths,fitted_deaths_lognormal);
+err_fitted_deaths_gev = RKVSG('generalized extreme value',deaths_first_wave_array,normalized_deaths);
+err_fitted_deaths_lognormal = RKVSG('lognormal',deaths_first_wave_array,normalized_deaths);
+err_fitted_deaths_log_logistic = RKVSG('log logistic',deaths_first_wave_array,normalized_deaths);
+err_fitted_deaths_normal = RKVSG('normal',deaths_first_wave_array,normalized_deaths);
+err_fitted_deaths_birnsaund = RKVSG('birnbaumsaunders',deaths_first_wave_array,normalized_deaths);
 
-temp3 = fitdist(data','log logistic','frequency',deaths_first_wave_array);
-fitted_deaths_log_logistic = pdf(temp3,data);
-err_fitted_deaths_log_logistic = immse(normalized_deaths,fitted_deaths_log_logistic);
+%% Confirmed - RKVSG
 
-temp4 = fitdist(data','normal','frequency',deaths_first_wave_array);
-fitted_deaths_normal  = pdf(temp4,data);
-err_fitted_deaths_normal = immse(normalized_deaths,fitted_deaths_gen_ext_val);
+err_fitted_confirmed_gev = RKVSG('generalized extreme value',confirmed_first_wave_array,normalized_confirmed);
+err_fitted_confirmed_lognormal = RKVSG('lognormal',confirmed_first_wave_array,normalized_confirmed);
+err_fitted_confirmed_log_logistic =  RKVSG('log logistic',confirmed_first_wave_array,normalized_confirmed);
+err_fitted_confirmed_normal = RKVSG('normal',confirmed_first_wave_array,normalized_confirmed);
+err_fitted_confirmed_birnsaund = RKVSG('birnbaumsaunders',confirmed_first_wave_array,normalized_confirmed);
 
-temp5 = fitdist(data','birnbaumsaunders','frequency',deaths_first_wave_array);
-fitted_deaths_birnsaund = pdf(temp5,data);
-err_fitted_deaths_birnsaund = immse(normalized_deaths,fitted_deaths_birnsaund);
 
-%% Confirmed - MSE
+% sum=0;
+% for i=1:length(confirmed_first_wave_array)
+% sum = sum+confirmed_first_wave_array(i);
+% end
 
-temp1  = fitdist(data','generalized extreme value','frequency',confirmed_first_wave_array);
-fitted_confirmed_gen_ext_val = pdf(temp1,data);
-err_fitted_confirmed_gev = immse(normalized_confirmed,fitted_confirmed_gen_ext_val);
+% data=1:142;
+% pd = fitdist(data','log normal','frequency',confirmed_first_wave_array);
+% y = pdf(pd,data);
+% confirmed_first_wave_array=confirmed_first_wave_array/sum;
+% figure
+% data=1:142;
+% b = bar(data,confirmed_first_wave_array);
+% hold on;
+% p = plot(data,y, 'Color','magenta','LineWidth',2 );
+% title('Log Normal', 'fontsize',17);
+% ylabel('Density', 'fontsize',14)
+% xlabel('Day', 'fontsize',14)
 
-temp2 = fitdist(data','lognormal','frequency',confirmed_first_wave_array);
-fitted_confirmed_lognormal = pdf(temp2,data);
-err_fitted_confirmed_lognormal = immse(normalized_confirmed,fitted_confirmed_lognormal);
 
-temp3 = fitdist(data','log logistic','frequency',confirmed_first_wave_array);
-fitted_confirmed_log_logistic = pdf(temp3,data);
-err_fitted_confirmed_log_logistic = immse(normalized_confirmed,fitted_confirmed_log_logistic);
 
-temp4 = fitdist(data','normal','frequency',confirmed_first_wave_array);
-fitted_confirmed_normal  = pdf(temp4,data);
-err_fitted_confirmed_normal = immse(normalized_confirmed,fitted_confirmed_normal);
-
-temp5 = fitdist(data','birnbaumsaunders','frequency',confirmed_first_wave_array);
-fitted_confirmed_birnsaund = pdf(temp5,data);
-err_fitted_confirmed_birnsaund = immse(normalized_confirmed,fitted_confirmed_birnsaund);
