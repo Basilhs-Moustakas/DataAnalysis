@@ -66,34 +66,34 @@ end
 error
 
 %% Plots for every Country 
-Corona_Plot(data{1},'lognormal','Log Normal',country{1,1},' Russia');
-Corona_Plot(data{1},'lognormal','Log Normal',country{1,2},' Russia');
-Corona_Plot(data{2},'lognormal','Log Normal',country{2,1},' Germany');
-Corona_Plot(data{2},'lognormal','Log Normal',country{2,2},' Germany');
-Corona_Plot(data{3},'lognormal','Log Normal',country{3,1},' France');
-Corona_Plot(data{3},'lognormal','Log Normal',country{3,2},' France');
-Corona_Plot(data{4},'lognormal','Log Normal',country{4,1},' UK');
-Corona_Plot(data{4},'lognormal','Log Normal',country{4,2},' UK');
-Corona_Plot(data{5},'lognormal','Log Normal',country{5,1},' Italy');
-Corona_Plot(data{5},'lognormal','Log Normal',country{5,2},' Italy');
-Corona_Plot(data{6},'lognormal','Log Normal',country{6,1},' Spain');
-Corona_Plot(data{6},'lognormal','Log Normal',country{6,2},' Spain');
-Corona_Plot(data{7},'lognormal','Log Normal',country{7,1},' Romania');
-Corona_Plot(data{7},'lognormal','Log Normal',country{7,2},' Romania');
-Corona_Plot(data{8},'lognormal','Log Normal',country{8,1},' Netherlands');
-Corona_Plot(data{8},'lognormal','Log Normal',country{8,2},' Netherlands');
-Corona_Plot(data{9},'lognormal','Log Normal',country{9,1},' Greece');
-Corona_Plot(data{9},'lognormal','Log Normal',country{9,2},' Greece');
-Corona_Plot(data{10},'lognormal','Log Normal',country{10,1},' Portugal');
-Corona_Plot(data{10},'lognormal','Log Normal',country{10,2},' Portugal');
-Corona_Plot(data{11},'lognormal','Log Normal',country{11,1},' Belgium');
-Corona_Plot(data{11},'lognormal','Log Normal',country{11,2},' Belgium');
-Corona_Plot(data{12},'lognormal','Log Normal',country{12,1},' Czechia');
-Corona_Plot(data{12},'lognormal','Log Normal',country{12,2},' Czechia');
-Corona_Plot(data{13},'lognormal','Log Normal',country{13,1},' Hungary');
-Corona_Plot(data{13},'lognormal','Log Normal',country{13,2},' Hungary');
-Corona_Plot(data{14},'lognormal','Log Normal',country{14,1},' Sweden');
-Corona_Plot(data{14},'lognormal','Log Normal',country{14,2},' Sweden');
+Corona_Plot(data{1},'lognormal','Log Normal',Russia_confirmed,' Russia');
+Corona_Plot(data{1},'lognormal','Log Normal',Russia_deaths,' Russia');
+Corona_Plot(data{2},'lognormal','Log Normal',Germany_confirmed,' Germany');
+Corona_Plot(data{2},'lognormal','Log Normal',Germany_deaths,' Germany');
+Corona_Plot(data{3},'lognormal','Log Normal',France_confirmed,' France');
+Corona_Plot(data{3},'lognormal','Log Normal',France_deaths,' France');
+Corona_Plot(data{4},'lognormal','Log Normal',UK_confirmed,' UK');
+Corona_Plot(data{4},'lognormal','Log Normal',UK_deaths,' UK');
+Corona_Plot(data{5},'lognormal','Log Normal',Italy_confirmed,' Italy');
+Corona_Plot(data{5},'lognormal','Log Normal',Italy_deaths,' Italy');
+Corona_Plot(data{6},'lognormal','Log Normal',Spain_confirmed,' Spain');
+Corona_Plot(data{6},'lognormal','Log Normal',Spain_deaths,' Spain');
+Corona_Plot(data{7},'lognormal','Log Normal',Romania_confirmed,' Romania');
+Corona_Plot(data{7},'lognormal','Log Normal',Romania_deaths,' Romania');
+Corona_Plot(data{8},'lognormal','Log Normal',Netherlands_confirmed,' Netherlands');
+Corona_Plot(1:length(Netherlands_confirmed),'lognormal','Log Normal',Netherlands_deaths,' Netherlands');
+Corona_Plot(1:length(Greece_confirmed),'lognormal','Log Normal',Greece_confirmed,' Greece');
+Corona_Plot(1:length(Greece_confirmed),'lognormal','Log Normal',Greece_deaths,' Greece');
+Corona_Plot(1:length(Portugal_confirmed),'lognormal','Log Normal',Portugal_confirmed,' Portugal');
+Corona_Plot(1:length(Portugal_confirmed),'lognormal','Log Normal',Portugal_deaths,' Portugal');
+Corona_Plot(1:length(Belgium_confirmed),'lognormal','Log Normal',Belgium_confirmed,' Belgium');
+Corona_Plot(1:length(Belgium_confirmed),'lognormal','Log Normal',Belgium_deaths,' Belgium');
+Corona_Plot(1:length(Czechia_confirmed),'lognormal','Log Normal',Czechia_confirmed,' Czechia');
+Corona_Plot(1:length(Czechia_confirmed),'lognormal','Log Normal',Czechia_deaths,' Czechia');
+Corona_Plot(1:length(Hungary_confirmed),'lognormal','Log Normal',Hungary_confirmed,' Hungary');
+Corona_Plot(1:length(Hungary_confirmed),'lognormal','Log Normal',Hungary_deaths,' Hungary');
+Corona_Plot(1:length(Sweden_confirmed),'lognormal','Log Normal',Sweden_confirmed,' Sweden');
+Corona_Plot(1:length(Sweden_confirmed),'lognormal','Log Normal',Sweden_deaths,' Sweden');
 
 
 
