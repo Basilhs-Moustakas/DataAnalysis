@@ -53,19 +53,19 @@ normalized_deaths = deaths_first_wave_array/sum2;
 
 %% Deaths - RKVSG
 
-err_fitted_deaths_gev = RKVSG('generalized extreme value',deaths_first_wave_array,normalized_deaths);
-err_fitted_deaths_lognormal = RKVSG('lognormal',deaths_first_wave_array,normalized_deaths);
-err_fitted_deaths_log_logistic = RKVSG('log logistic',deaths_first_wave_array,normalized_deaths);
-err_fitted_deaths_normal = RKVSG('normal',deaths_first_wave_array,normalized_deaths);
-err_fitted_deaths_birnsaund = RKVSG('birnbaumsaunders',deaths_first_wave_array,normalized_deaths);
+err_fitted_deaths_gev = RKVSG('generalized extreme value',deaths_first_wave_array,normalized_deaths,data);
+err_fitted_deaths_lognormal = RKVSG('lognormal',deaths_first_wave_array,normalized_deaths,data);
+err_fitted_deaths_log_logistic = RKVSG('log logistic',deaths_first_wave_array,normalized_deaths,data);
+err_fitted_deaths_normal = RKVSG('normal',deaths_first_wave_array,normalized_deaths,data);
+err_fitted_deaths_birnsaund = RKVSG('birnbaumsaunders',deaths_first_wave_array,normalized_deaths,data);
 
 %% Confirmed - RKVSG
 
-err_fitted_confirmed_gev = RKVSG('generalized extreme value',confirmed_first_wave_array,normalized_confirmed);
-err_fitted_confirmed_lognormal = RKVSG('lognormal',confirmed_first_wave_array,normalized_confirmed);
-err_fitted_confirmed_log_logistic =  RKVSG('log logistic',confirmed_first_wave_array,normalized_confirmed);
-err_fitted_confirmed_normal = RKVSG('normal',confirmed_first_wave_array,normalized_confirmed);
-err_fitted_confirmed_birnsaund = RKVSG('birnbaumsaunders',confirmed_first_wave_array,normalized_confirmed);
+err_fitted_confirmed_gev = RKVSG('generalized extreme value',confirmed_first_wave_array,normalized_confirmed,data);
+err_fitted_confirmed_lognormal = RKVSG('lognormal',confirmed_first_wave_array,normalized_confirmed,data);
+err_fitted_confirmed_log_logistic =  RKVSG('log logistic',confirmed_first_wave_array,normalized_confirmed,data);
+err_fitted_confirmed_normal = RKVSG('normal',confirmed_first_wave_array,normalized_confirmed,data);
+err_fitted_confirmed_birnsaund = RKVSG('birnbaumsaunders',confirmed_first_wave_array,normalized_confirmed,data);
 
 
 % sum=0;
