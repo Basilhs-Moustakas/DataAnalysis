@@ -59,11 +59,11 @@ err_fitted_deaths_log_logistic = MSE('log logistic',deaths_first_wave_array,data
 err_fitted_deaths_normal = MSE('normal',deaths_first_wave_array,data);
 err_fitted_deaths_birnsaund = MSE('birnbaumsaunders',deaths_first_wave_array,data);
 
-Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',deaths_first_wave_array,'Italy',normalized_deaths);
-Corona_Plot(data,'lognormal','Log Normal',deaths_first_wave_array,'Italy',normalized_deaths);
-Corona_Plot(data,'log logistic','Log Logistic',deaths_first_wave_array,'Italy',normalized_deaths);
-Corona_Plot(data,'normal','Normal',deaths_first_wave_array,'Italy',normalized_deaths);
-Corona_Plot(data,'birnbaumsaunders','Birnbaum-Saunders',deaths_first_wave_array,'Italy',normalized_deaths);
+Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',deaths_first_wave_array,' Italy');
+Corona_Plot(data,'lognormal','Log Normal',deaths_first_wave_array,' Italy');
+Corona_Plot(data,'log logistic','Log Logistic',deaths_first_wave_array,' Italy');
+Corona_Plot(data,'normal','Normal',deaths_first_wave_array,' Italy');
+Corona_Plot(data,'birnbaumsaunders','Birnbaum-Saunders',deaths_first_wave_array,' Italy');
 
 %% Confirmed - MSE
 
@@ -73,11 +73,11 @@ err_fitted_confirmed_log_logistic =  MSE('log logistic',confirmed_first_wave_arr
 err_fitted_confirmed_normal = MSE('normal',confirmed_first_wave_array,data);
 err_fitted_confirmed_birnsaund = MSE('birnbaumsaunders',confirmed_first_wave_array,data);
 
-Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',confirmed_first_wave_array,'Italy',normalized_confirmed);
-Corona_Plot(data,'lognormal','Log Normal',confirmed_first_wave_array,'Italy',normalized_confirmed);
-Corona_Plot(data,'log logistic','Log Logistic',confirmed_first_wave_array,'Italy',normalized_confirmed);
-Corona_Plot(data,'normal','Normal',confirmed_first_wave_array,'Italy',normalized_confirmed);
-Corona_Plot(data,'birnbaumsaunders','Birnbaum-Saunders',confirmed_first_wave_array,'Italy',normalized_confirmed);
+Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',confirmed_first_wave_array,' Italy');
+Corona_Plot(data,'lognormal','Log Normal',confirmed_first_wave_array,' Italy');
+Corona_Plot(data,'log logistic','Log Logistic',confirmed_first_wave_array,' Italy');
+Corona_Plot(data,'normal','Normal',confirmed_first_wave_array,' Italy');
+Corona_Plot(data,'birnbaumsaunders','Birnbaum-Saunders',confirmed_first_wave_array,' Italy');
 
 
 
