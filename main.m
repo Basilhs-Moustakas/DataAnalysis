@@ -51,13 +51,13 @@ data = 1:length(confirmed_first_wave_array);
 
 normalized_deaths = deaths_first_wave_array/sum2;
 
-%% Deaths - RKVSG
+%% Deaths - MSE
 
-err_fitted_deaths_gev = RKVSG('generalized extreme value',deaths_first_wave_array,data);
-err_fitted_deaths_lognormal = RKVSG('lognormal',deaths_first_wave_array,data);
-err_fitted_deaths_log_logistic = RKVSG('log logistic',deaths_first_wave_array,data);
-err_fitted_deaths_normal = RKVSG('normal',deaths_first_wave_array,data);
-err_fitted_deaths_birnsaund = RKVSG('birnbaumsaunders',deaths_first_wave_array,data);
+err_fitted_deaths_gev = MSE('generalized extreme value',deaths_first_wave_array,data);
+err_fitted_deaths_lognormal = MSE('lognormal',deaths_first_wave_array,data);
+err_fitted_deaths_log_logistic = MSE('log logistic',deaths_first_wave_array,data);
+err_fitted_deaths_normal = MSE('normal',deaths_first_wave_array,data);
+err_fitted_deaths_birnsaund = MSE('birnbaumsaunders',deaths_first_wave_array,data);
 
 Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',deaths_first_wave_array,'Italy',normalized_deaths);
 Corona_Plot(data,'lognormal','Log Normal',deaths_first_wave_array,'Italy',normalized_deaths);
@@ -65,13 +65,13 @@ Corona_Plot(data,'log logistic','Log Logistic',deaths_first_wave_array,'Italy',n
 Corona_Plot(data,'normal','Normal',deaths_first_wave_array,'Italy',normalized_deaths);
 Corona_Plot(data,'birnbaumsaunders','Birnbaum-Saunders',deaths_first_wave_array,'Italy',normalized_deaths);
 
-%% Confirmed - RKVSG
+%% Confirmed - MSE
 
-err_fitted_confirmed_gev = RKVSG('generalized extreme value',confirmed_first_wave_array,data);
-err_fitted_confirmed_lognormal = RKVSG('lognormal',confirmed_first_wave_array,data);
-err_fitted_confirmed_log_logistic =  RKVSG('log logistic',confirmed_first_wave_array,data);
-err_fitted_confirmed_normal = RKVSG('normal',confirmed_first_wave_array,data);
-err_fitted_confirmed_birnsaund = RKVSG('birnbaumsaunders',confirmed_first_wave_array,data);
+err_fitted_confirmed_gev = MSE('generalized extreme value',confirmed_first_wave_array,data);
+err_fitted_confirmed_lognormal = MSE('lognormal',confirmed_first_wave_array,data);
+err_fitted_confirmed_log_logistic =  MSE('log logistic',confirmed_first_wave_array,data);
+err_fitted_confirmed_normal = MSE('normal',confirmed_first_wave_array,data);
+err_fitted_confirmed_birnsaund = MSE('birnbaumsaunders',confirmed_first_wave_array,data);
 
 Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',confirmed_first_wave_array,'Italy',normalized_confirmed);
 Corona_Plot(data,'lognormal','Log Normal',confirmed_first_wave_array,'Italy',normalized_confirmed);
