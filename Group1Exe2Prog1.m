@@ -32,3 +32,19 @@ Hungary_confirmed =  table2array(Confirmed(60,70:153));
 Hungary_deaths    =  table2array(Deaths(60,70:153));
 Sweden_confirmed =  table2array(Confirmed(133,60:211));
 Sweden_deaths    =  table2array(Deaths(133,60:211));
+
+
+
+
+
+%% Plots for every Country with 
+
+
+
+
+
+
+
+
+
+
