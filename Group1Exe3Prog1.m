@@ -8,4 +8,14 @@ for i=1:14
     difference_maxima(i) = Maxima_difference_calc(country{i,1},country{i,2});
     
 end
-difference_maxima
+difference_maxima;
+
+alpha = 0.05;
+
+m_bootstrap = bootci(10000,{@mean,difference_maxima(1:13)},'alpha',alpha)
+
+m2 = mean(difference_maxima(1:13));
+s2 = std(difference_maxima(1:13));
+stud = tinv(1-alpha,length(difference_maxima(1:13))-1) * s2 /sqrt(length(difference_maxima(1:13)));
+
+m_parametric = [m2-stud ;m2+stud]
