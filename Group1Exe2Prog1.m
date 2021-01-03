@@ -63,7 +63,16 @@ for i=1:length(strings_array)
     error(i,2) = MSE(distribution,country{i,2},data{i});
 end
 
-error
+country_errors = cell(length(strings_array),3);
+for i=1:length(strings_array)
+    country_errors{i,1} = error(i,1);
+    country_errors{i,2} = error(i,2);
+    country_errors{i,3} = strings_array(i);
+end
+
+sorted_confirmed = sortrows(country_errors,1)
+sorted_deaths = sortrows(country_errors,2)
+
 
 %% Plots for every Country 
 Corona_Plot(data{1},'lognormal','Log Normal',country{1,1},' Russia');
