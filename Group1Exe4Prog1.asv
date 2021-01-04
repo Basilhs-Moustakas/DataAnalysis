@@ -21,20 +21,9 @@ for i=1:length(strings_array)
     data{i} = 1:length(country{i,1});
 end
 
-% countries=country;
+countries=country;
 
-countries{1,1} = country{1,1};
-countries{1,2} = country{1,2};
-countries{2,1} = country{2,1};
-countries{2,2} = country{2,2};
-countries{3,1} = country{4,1};
-countries{3,2} = country{4,2};
-countries{4,1} = country{5,1};
-countries{4,2} = country{5,2};
-countries{5,1} = country{6,1};
-countries{5,2} = country{6,2};
-countries{6,1} = country{8,1};
-countries{6,2} = country{8,2};
+
 
 for j=1:length(strings_array)
     coeff_matrix = zeros(1,length(strings_array));
@@ -69,13 +58,6 @@ end
 % country_correlation{12,2}='Czechia';
 % country_correlation{13,2}='Hungary';
 % country_correlation{14,2}='Sweden';
-
-country_correlation{1,2}='Russia';
-country_correlation{2,2}='Germany';
-country_correlation{3,2}='UK';
-country_correlation{4,2}='Italy';
-country_correlation{5,2}='Spain';
-country_correlation{6,2}='Netherlands';
 
 sorted_correlations = sortrows(country_correlation,1);
 
