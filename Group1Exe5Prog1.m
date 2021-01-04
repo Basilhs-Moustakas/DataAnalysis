@@ -79,7 +79,7 @@ figure()
 X = 0:20;
 Y = errors(:,1);
 hb=bar(X,Y);
-my_colors=colormap(cool);
+my_colors=colormap(bone);
 hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
@@ -93,7 +93,7 @@ figure()
 X = 0:20;
 Y = errors(:,2);
 hb=bar(X,Y);
-my_colors=colormap(cool);
+my_colors=colormap(bone);
 hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
@@ -107,7 +107,7 @@ figure()
 X = 0:20;
 Y = errors(:,3);
 hb=bar(X,Y);
-my_colors=colormap(cool);
+my_colors=colormap(bone);
 hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
@@ -121,7 +121,7 @@ figure()
 X = 0:20;
 Y = errors(:,4);
 hb=bar(X,Y);
-my_colors=colormap(cool);
+my_colors=colormap(bone);
 hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
@@ -135,7 +135,7 @@ figure()
 X = 0:20;
 Y = errors(:,5);
 hb=bar(X,Y);
-my_colors=colormap(cool);
+my_colors=colormap(bone);
 hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
@@ -149,7 +149,7 @@ figure()
 X = 0:20;
 Y = errors(:,6);
 hb=bar(X,Y);
-my_colors=colormap(cool);
+my_colors=colormap(bone);
 hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
@@ -161,5 +161,36 @@ grid on;
 
 
 
+country_days = cell(length(strings_array),2);
+for i=1:length(strings_array)
+    country_days{i,1} = days_delay(i);
+end
 
+
+country_days{1,2}='Russia';
+country_days{2,2}='Germany';
+country_days{3,2}='UK';
+country_days{4,2}='Italy';
+country_days{5,2}='Spain';
+country_days{6,2}='Netherlands';
+
+sorted_days = sortrows(country_days,1);
+
+figure()
+X = categorical(sorted_days(:,2));
+X = reordercats(X,sorted_days(:,2));
+Y = cell2mat(sorted_days(:,1));
+hb=bar(X,Y);
+my_colors=colormap(bone);
+hb.FaceColor = 'flat';
+hb.CData(1,:) = my_colors(60,:);
+hb.CData(2,:) = my_colors(50,:);
+hb.CData(3,:) = my_colors(40,:);
+hb.CData(4,:) = my_colors(30,:);
+hb.CData(5,:) = my_colors(20,:);
+hb.CData(6,:) = my_colors(10,:);
+
+title('Days Delay for Minimum Error','FontSize',16 ) 
+ylabel('Days','FontSize',14 )
+grid on;
 
