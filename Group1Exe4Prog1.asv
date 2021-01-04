@@ -1,8 +1,25 @@
 close all;
 clear all;
-
+ 
 country = load("country.mat");
 country = country.country;
+
+
+
+%% Data from every Country
+
+distribution = 'lognormal';
+
+
+%% Plots for every Country with 
+
+strings_array = ["Russia","Germany","UK","Italy","Spain","Netherlands"];
+
+data = cell(length(strings_array),1);
+for i=1:length(strings_array)
+    data{i} = 1:length(country{i,1});
+end
+
 countries{1,1} = country{1,1};
 countries{1,2} = country{1,2};
 countries{2,1} = country{2,1};
@@ -15,19 +32,10 @@ countries{5,1} = country{6,1};
 countries{5,2} = country{6,2};
 countries{6,1} = country{8,1};
 countries{6,2} = country{8,2};
-difference_maxima=zeros(1,6);
-for i=1:6
-    difference_maxima(i) = Maxima_difference_calc(countries{i,1},countries{i,2});
-    
+
+confirmed = countries{1,1};
+deaths = countries{1,2}(20:end)
+
+for i=-20:20
+    coeff_matrix=corrcoeff(countries{1,1},countries{1,2}(i);
 end
-difference_maxima;
-
-alpha = 0.05;
-
-m_bootstrap = bootci(1000,{@mean,difference_maxima(1:13)},'alpha',alpha)
-
-m2 = mean(difference_maxima(1:6));
-s2 = std(difference_maxima(1:6));
-stud = tinv(1-alpha,length(difference_maxima(1:13))-1) * s2 /sqrt(length(difference_maxima(1:13)));
-
-m_parametric = [m2-stud ;m2+stud]

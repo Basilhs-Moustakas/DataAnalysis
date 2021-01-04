@@ -12,7 +12,7 @@ difference_maxima;
 
 alpha = 0.05;
 
-m_bootstrap = bootci(10000,{@mean,difference_maxima(1:13)},'alpha',alpha)
+m_bootstrap = bootci(1000,{@mean,difference_maxima(1:13)},'alpha',alpha)
 
 m2 = mean(difference_maxima(1:13));
 s2 = std(difference_maxima(1:13));
