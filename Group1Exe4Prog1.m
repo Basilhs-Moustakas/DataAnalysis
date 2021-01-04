@@ -12,13 +12,16 @@ distribution = 'lognormal';
 
 
 %% Plots for every Country with 
-
 strings_array = ["Russia","Germany","UK","Italy","Spain","Netherlands"];
+% strings_array = ["Russia","Germany","France","UK","Italy","Spain","Romania","Netherlands","Greece","Portugal",...
+%     "Belgium","Czechia","Hungary","Sweden"];
 
 data = cell(length(strings_array),1);
 for i=1:length(strings_array)
     data{i} = 1:length(country{i,1});
 end
+
+% countries=country;
 
 countries{1,1} = country{1,1};
 countries{1,2} = country{1,2};
@@ -32,8 +35,6 @@ countries{5,1} = country{6,1};
 countries{5,2} = country{6,2};
 countries{6,1} = country{8,1};
 countries{6,2} = country{8,2};
-
-
 
 for j=1:length(strings_array)
     coeff_matrix = zeros(1,length(strings_array));
@@ -50,3 +51,51 @@ for j=1:length(strings_array)
     tau_of_max_correlation(j) = tau - 21;   
 end
 
+country_correlation = cell(length(strings_array),2);
+for i=1:length(strings_array)
+    country_correlation{i,1} = tau_of_max_correlation(i);
+end
+% country_correlation{1,2}='Russia';
+% country_correlation{2,2}='Germany';
+% country_correlation{3,2}='France';
+% country_correlation{4,2}='UK';
+% country_correlation{5,2}='Italy';
+% country_correlation{6,2}='Spain';
+% country_correlation{7,2}='Romania';
+% country_correlation{8,2}='Netherlands';
+% country_correlation{9,2}='Greece';
+% country_correlation{10,2}='Portugal';
+% country_correlation{11,2}='Belgium';
+% country_correlation{12,2}='Czechia';
+% country_correlation{13,2}='Hungary';
+% country_correlation{14,2}='Sweden';
+
+country_correlation{1,2}='Russia';
+country_correlation{2,2}='Germany';
+country_correlation{3,2}='UK';
+country_correlation{4,2}='Italy';
+country_correlation{5,2}='Spain';
+country_correlation{6,2}='Netherlands';
+
+sorted_correlations = sortrows(country_correlation,1);
+
+
+
+figure()
+X = categorical(sorted_correlations(:,2));
+X = reordercats(X,sorted_correlations(:,2));
+Y = cell2mat(sorted_correlations(:,1));
+hb=bar(X,Y);
+my_colors=colormap(cool);
+hb.FaceColor = 'flat';
+hb.CData(1,:) = my_colors(60,:);
+hb.CData(2,:) = my_colors(50,:);
+hb.CData(3,:) = my_colors(40,:);
+hb.CData(4,:) = my_colors(30,:);
+hb.CData(5,:) = my_colors(20,:);
+hb.CData(6,:) = my_colors(10,:);
+
+
+title('Maximum Correleation - Days Difference','FontSize',16 ) 
+ylabel('Days','FontSize',14 )
+grid on;
