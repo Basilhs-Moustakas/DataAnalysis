@@ -33,9 +33,16 @@ countries{5,2} = country{6,2};
 countries{6,1} = country{8,1};
 countries{6,2} = country{8,2};
 
-confirmed = countries{1,1};
-deaths = countries{1,2}(20:end)
-
-for i=-20:20
-    coeff_matrix=corrcoeff(countries{1,1},countries{1,2}(i);
+% for j=1:length(strings_array)  
+%     lambda(j) = countries{j,1}'\countries{j,2}';  
+% end
+X = cell(length(strings_array),1);
+for i=1:length(strings_array)
+    X{i} = [ones(length(countries{i,1}'),1) countries{i,1}'];
+    b(:,i) = X{i}\countries{i,2}';
 end
+
+y1 = X{1}*b(:,1);
+plot(countries{1,1},y1)
+hold on
+scatter(countries{1,1},countries{1,2})
