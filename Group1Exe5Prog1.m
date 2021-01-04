@@ -4,7 +4,7 @@ clear all;
 country = load("country.mat");
 country = country.country;
 
-
+number_of_countries=6;
 
 %% Data from every Country
 
@@ -14,6 +14,9 @@ distribution = 'lognormal';
 %% Plots for every Country with 
 
 strings_array = ["Russia","Germany","UK","Italy","Spain","Netherlands"];
+% strings_array = ["Russia","Germany","France","UK","Italy","Spain","Romania","Netherlands","Greece","Portugal",...
+%     "Belgium","Czechia","Hungary","Sweden"];
+
 
 data = cell(length(strings_array),1);
 for i=1:length(strings_array)
@@ -33,11 +36,9 @@ countries{5,2} = country{6,2};
 countries{6,1} = country{8,1};
 countries{6,2} = country{8,2};
 
-% for j=1:length(strings_array)  
-%     lambda(j) = countries{j,1}'\countries{j,2}';  
-% end
+% countries=country;
 
-estimated_deaths = cell(21,6);
+estimated_deaths = cell(21,number_of_countries);
 
 
 for tau=0:20
@@ -51,7 +52,7 @@ X = cell(length(strings_array),1);
     end
 end
 
-errors = zeros(21,6);
+errors = zeros(21,number_of_countries);
 
 for i=1:length(strings_array)
     for tau=0:20
@@ -59,13 +60,13 @@ for i=1:length(strings_array)
     end
 end
 
-days_delay=zeros(1,6);
+days_delay=zeros(1,number_of_countries);
 
 for i=1:length(strings_array)
     [~,days_delay(i)] = min(errors(:,i));
 end
 days_delay=days_delay-1;
-% days_delay
+
 % tau=18;
 % c=4;
 % plot(countries{c,1}(1:end-tau),estimated_deaths{1+tau,c})
@@ -166,13 +167,31 @@ for i=1:length(strings_array)
     country_days{i,1} = days_delay(i);
 end
 
-
+ 
 country_days{1,2}='Russia';
 country_days{2,2}='Germany';
 country_days{3,2}='UK';
 country_days{4,2}='Italy';
 country_days{5,2}='Spain';
 country_days{6,2}='Netherlands';
+
+% country_days{1,2}='Russia';
+% country_days{2,2}='Germany';
+% country_days{3,2}='France';
+% country_days{4,2}='UK';
+% country_days{5,2}='Italy';
+% country_days{6,2}='Spain';
+% country_days{7,2}='Romania';
+% country_days{8,2}='Netherlands';
+% country_days{9,2}='Greece';
+% country_days{10,2}='Portugal';
+% country_days{11,2}='Belgium';
+% country_days{12,2}='Czechia';
+% country_days{13,2}='Hungary';
+% country_days{14,2}='Sweden';
+
+
+
 
 sorted_days = sortrows(country_days,1);
 
@@ -189,6 +208,9 @@ hb.CData(3,:) = my_colors(40,:);
 hb.CData(4,:) = my_colors(30,:);
 hb.CData(5,:) = my_colors(20,:);
 hb.CData(6,:) = my_colors(10,:);
+% for i=1:14
+% hb.CData(i,:) = my_colors(3*i,:);
+% end
 
 title('Days Delay for Minimum Error','FontSize',16 ) 
 ylabel('Days','FontSize',14 )
