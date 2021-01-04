@@ -65,20 +65,99 @@ for i=1:length(strings_array)
     [~,days_delay(i)] = min(errors(:,i));
 end
 days_delay=days_delay-1;
-days_delay
-tau=18;
-c=4;
-plot(countries{c,1}(1:end-tau),estimated_deaths{1+tau,c})
-hold on
-scatter(countries{c,1}(1:end-tau),countries{c,2}(1+tau:end))
+% days_delay
+% tau=18;
+% c=4;
+% plot(countries{c,1}(1:end-tau),estimated_deaths{1+tau,c})
+% hold on
+% scatter(countries{c,1}(1:end-tau),countries{c,2}(1+tau:end))
 
 
+%% Plots
 
+figure()
+X = 0:20;
+Y = errors(:,1);
+hb=bar(X,Y);
+my_colors=colormap(cool);
+hb.FaceColor = 'flat';
+for i=1:21
+hb.CData(i,:) = my_colors(3*i,:);
+end
+title('Russia','FontSize',16 ) 
+ylabel('Mean Square Error','FontSize',14 )
+xlabel('Days Difference','FontSize',14 )
+grid on;
 
+figure()
+X = 0:20;
+Y = errors(:,2);
+hb=bar(X,Y);
+my_colors=colormap(cool);
+hb.FaceColor = 'flat';
+for i=1:21
+hb.CData(i,:) = my_colors(3*i,:);
+end
+title('Germany','FontSize',16 ) 
+ylabel('Mean Square Error','FontSize',14 )
+xlabel('Days Difference','FontSize',14 )
+grid on;
 
+figure()
+X = 0:20;
+Y = errors(:,3);
+hb=bar(X,Y);
+my_colors=colormap(cool);
+hb.FaceColor = 'flat';
+for i=1:21
+hb.CData(i,:) = my_colors(3*i,:);
+end
+title('United Kingdom','FontSize',16 ) 
+ylabel('Mean Square Error','FontSize',14 )
+xlabel('Days Difference','FontSize',14 )
+grid on;
 
+figure()
+X = 0:20;
+Y = errors(:,4);
+hb=bar(X,Y);
+my_colors=colormap(cool);
+hb.FaceColor = 'flat';
+for i=1:21
+hb.CData(i,:) = my_colors(3*i,:);
+end
+title('Italy','FontSize',16 ) 
+ylabel('Mean Square Error','FontSize',14 )
+xlabel('Days Difference','FontSize',14 )
+grid on;
 
+figure()
+X = 0:20;
+Y = errors(:,5);
+hb=bar(X,Y);
+my_colors=colormap(cool);
+hb.FaceColor = 'flat';
+for i=1:21
+hb.CData(i,:) = my_colors(3*i,:);
+end
+title('Spain','FontSize',16 ) 
+ylabel('Mean Square Error','FontSize',14 )
+xlabel('Days Difference','FontSize',14 )
+grid on;
 
+figure()
+X = 0:20;
+Y = errors(:,6);
+hb=bar(X,Y);
+my_colors=colormap(cool);
+hb.FaceColor = 'flat';
+for i=1:21
+hb.CData(i,:) = my_colors(3*i,:);
+end
+title('Netherlands','FontSize',16 ) 
+ylabel('Mean Square Error','FontSize',14 )
+xlabel('Days Difference','FontSize',14 )
+grid on;
 
 
 
