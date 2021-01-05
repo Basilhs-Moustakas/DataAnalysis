@@ -6,13 +6,6 @@ country = country.country;
 
 number_of_countries=6;
 
-%% Data from every Country
-
-distribution = 'lognormal';
-
-
-%% Plots for every Country with 
-
 strings_array = ["Russia","Germany","UK","Italy","Spain","Netherlands"];
 % strings_array = ["Russia","Germany","France","UK","Italy","Spain","Romania","Netherlands","Greece","Portugal",...
 %     "Belgium","Czechia","Hungary","Sweden"];
