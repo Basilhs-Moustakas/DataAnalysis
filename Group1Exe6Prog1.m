@@ -105,12 +105,13 @@ title('Errors with Different Regression Methods','FontSize',14 )
 ylabel('Mean Square Error','FontSize',14 )
 grid on;
 
-% c=1;
-% 
+
+% for c=1:6
+% figure
 % scatter(countries{c,2}(1+20:end),estimated_deaths_total{c})
 % hold on
 % plot(countries{c,2}(1+20:end),countries{c,2}(1+20:end))
 % xlabel('Actual deaths')
 % ylabel('Predicted deaths')
 % hold off
-
+% end
