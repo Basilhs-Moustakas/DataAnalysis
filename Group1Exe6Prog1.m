@@ -45,6 +45,7 @@ for i=1:length(strings_array)
     b(:,i) = regress(deaths',X{i});
     estimated_deaths_total{i} = X{i}*b(:,i);
 end
+
 for i=1:length(strings_array)
     B1 = ridge(countries{i,2}(1+20:end)',X{i}(:,2:end),5,0);
     estimated_deaths_ridge{i} = B1(1) + X{i}(:,2:end)*B1(2:end);
@@ -75,11 +76,16 @@ for i=1:length(strings_array)
         errors_total(i) = immse(estimated_deaths_total{i},countries{i,2}(1+20:end)');
         errors_ridge(i) = immse(estimated_deaths_ridge{i},countries{i,2}(1+20:end)');
 end
-% for i=1:length(strings_array)
-%     B2 = lasso(X{i}(:,2:end),countries{i,2}(1+20:end)','Lambda',1e-03);
-%     estimated_deaths_lasso = X{i}(:,2:end)*B2;
-%     errors_lasso(i) = immse(estimated_deaths_lasso,countries{i,2}(1+20:end)');
-% end
+
+for i=1:length(strings_array)
+    X{i} = ones(length(countries{i,1}(1+tau:end-20+tau)),1);
+    for tau=0:20
+        X{i} = [X{i}  countries{i,1}(1+tau:end-20+tau)'];
+    end
+    B2 = lasso(X{i}(:,2:end),countries{i,2}(1+20:end),'Lambda',1e-03);
+    estimated_deaths_lasso = X{i}(:,2:end)*B2;
+    errors_lasso(i) = immse(estimated_deaths_lasso,countries{i,2}(1+20:end)');
+end
 % errors_total
 % errors_ridge
 % errors_one_variable
