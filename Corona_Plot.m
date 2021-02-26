@@ -10,6 +10,7 @@ figure
 bar(data,normalized_array);
 hold on;
 p=plot(data,y, 'Color','magenta','LineWidth',2 );
+grid on;
 legend(p,Title)
 title(strcat( country, data_type) , 'fontsize',17);
 ylabel('Density', 'fontsize',14)
