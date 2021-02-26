@@ -100,7 +100,7 @@ hb(1).FaceColor = my_colors(10,:);
 hb(2).FaceColor = my_colors(25,:);
 hb(3).FaceColor = my_colors(40,:);
 
-legend('Using All Data','Using Ridge Regression','Using Data from ex4','Location','northwest')
+legend('Using All Data','Using Ridge Regression','Using Data from exercise 4','Location','northwest')
 title('Errors with Different Regression Methods','FontSize',14 ) 
 ylabel('Mean Square Error','FontSize',14 )
 grid on;

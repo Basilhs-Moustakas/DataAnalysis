@@ -8,7 +8,7 @@ for i=1:14
     difference_maxima(i) = Maxima_difference_calc(country{i,1},country{i,2});
     
 end
-difference_maxima;
+difference_maxima
 
 alpha = 0.05;
 
