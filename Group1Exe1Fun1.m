@@ -1,4 +1,4 @@
-function [] = Corona_Plot(data,distribution,Title,array,country,data_type)
+function [] = Group1Exe1Fun1(data,distribution,Title,array,country,data_type)
 sum=0;
 for i=1:length(array)
     sum = sum+array(i);
@@ -12,8 +12,8 @@ hold on;
 p=plot(data,y, 'Color','magenta','LineWidth',2 );
 grid on;
 legend(p,Title)
-title(strcat( country, data_type) , 'fontsize',17);
-ylabel('Density', 'fontsize',14)
-xlabel('Day', 'fontsize',14)
+title(strcat( country, data_type) , 'interpreter', 'latex', 'fontsize',17);
+ylabel('Density', 'interpreter', 'latex', 'fontsize',14)
+xlabel('Day', 'interpreter', 'latex', 'fontsize',14)
 end
 

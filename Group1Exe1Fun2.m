@@ -1,4 +1,4 @@
-function error = MSE(distribution,array,data)
+function error = Group1Exe1Fun2(distribution,array,data)
 sum=0;
 for i=1:length(array)
     sum = sum+array(i);

@@ -1,12 +1,7 @@
 close all;
-% Deaths = readtable('Covid19Deaths.xlsx');
-% Confirmed = readtable('Covid19Confirmed.xlsx');
-
-% country = cell(14,2);
  
 country = load("country.mat");
 country = country.country;
-
 
 
 %% Data from every Country
@@ -24,14 +19,14 @@ for i=1:length(strings_array)
     data{i} = 1:length(country{i,1});
 end
 
-for i=1:length(strings_array)
-    fitted(i,1) = fitdist((1:length(country{i,1}))',distribution,'frequency',country{i,1});
-    fitted(i,2) = fitdist((1:length(country{i,2}))',distribution,'frequency',country{i,2});
+for i=1:14
+    fitted(i,1) = fitdist((1:length(country{i,1}))',distribution,'frequency',country{i,1}');
+    fitted(i,2) = fitdist((1:length(country{i,2}))',distribution,'frequency',country{i,2}');
 end
 
 for i=1:length(strings_array)
-    error(i,1) = MSE(distribution,country{i,1},data{i});
-    error(i,2) = MSE(distribution,country{i,2},data{i});
+    error(i,1) = Group1Exe1Fun2(distribution,country{i,1},data{i});
+    error(i,2) = Group1Exe1Fun2(distribution,country{i,2},data{i});
 end
 
 country_errors = cell(length(strings_array),3);
@@ -107,45 +102,51 @@ hb.CData(12,:) = my_colors(16,:);
 hb.CData(13,:) = my_colors(12,:);
 hb.CData(14,:) = my_colors(8,:);
 
-title('Deaths','FontSize',16 ) 
-ylabel('Mean Square Error - Log Normal','FontSize',14 )
+title('Deaths', 'interpreter', 'latex','FontSize',16 ) 
+ylabel('Mean Square Error - Log Normal', 'interpreter', 'latex','FontSize',14 )
 grid on;
 
 
 
 
 %% Plots for every Country 
-% Corona_Plot(data{1},'lognormal','Log Normal',country{1,1},' Russia',' Confirmed Cases');
-% Corona_Plot(data{1},'lognormal','Log Normal',country{1,2},' Russia',' Deaths');
-% Corona_Plot(data{2},'lognormal','Log Normal',country{2,1},' Germany',' Confirmed Cases');
-% Corona_Plot(data{2},'lognormal','Log Normal',country{2,2},' Germany',' Deaths');
-% Corona_Plot(data{3},'lognormal','Log Normal',country{3,1},' France',' Confirmed Cases');
-% Corona_Plot(data{3},'lognormal','Log Normal',country{3,2},' France',' Deaths');
-% Corona_Plot(data{4},'lognormal','Log Normal',country{4,1},' UK',' Confirmed Cases');
-% Corona_Plot(data{4},'lognormal','Log Normal',country{4,2},' UK',' Deaths');
-% Corona_Plot(data{5},'lognormal','Log Normal',country{5,1},' Italy',' Confirmed Cases');
-% Corona_Plot(data{5},'lognormal','Log Normal',country{5,2},' Italy',' Deaths');
-% Corona_Plot(data{6},'lognormal','Log Normal',country{6,1},' Spain',' Confirmed Cases');
-% Corona_Plot(data{6},'lognormal','Log Normal',country{6,2},' Spain',' Deaths');
-% Corona_Plot(data{7},'lognormal','Log Normal',country{7,1},' Romania',' Confirmed Cases');
-% Corona_Plot(data{7},'lognormal','Log Normal',country{7,2},' Romania',' Deaths');
-% Corona_Plot(data{8},'lognormal','Log Normal',country{8,1},' Netherlands',' Confirmed Cases');
-% Corona_Plot(data{8},'lognormal','Log Normal',country{8,2},' Netherlands',' Deaths');
-% Corona_Plot(data{9},'lognormal','Log Normal',country{9,1},' Greece',' Confirmed Cases');
-% Corona_Plot(data{9},'lognormal','Log Normal',country{9,2},' Greece',' Deaths');
-% Corona_Plot(data{10},'lognormal','Log Normal',country{10,1},' Portugal',' Confirmed Cases');
-% Corona_Plot(data{10},'lognormal','Log Normal',country{10,2},' Portugal',' Deaths');
-% Corona_Plot(data{11},'lognormal','Log Normal',country{11,1},' Belgium',' Confirmed Cases');
-% Corona_Plot(data{11},'lognormal','Log Normal',country{11,2},' Belgium',' Deaths');
-% Corona_Plot(data{12},'lognormal','Log Normal',country{12,1},' Czechia',' Confirmed Cases');
-% Corona_Plot(data{12},'lognormal','Log Normal',country{12,2},' Czechia',' Deaths');
-% Corona_Plot(data{13},'lognormal','Log Normal',country{13,1},' Hungary',' Confirmed Cases');
-% Corona_Plot(data{13},'lognormal','Log Normal',country{13,2},' Hungary',' Deaths');
-% Corona_Plot(data{14},'lognormal','Log Normal',country{14,1},' Sweden',' Confirmed Cases');
-% Corona_Plot(data{14},'lognormal','Log Normal',country{14,2},' Sweden',' Deaths');
+Group1Exe1Fun1(data{1},'lognormal','Log Normal',country{1,1},' Russia',' Confirmed Cases');
+Group1Exe1Fun1(data{1},'lognormal','Log Normal',country{1,2},' Russia',' Deaths');
+Group1Exe1Fun1(data{2},'lognormal','Log Normal',country{2,1},' Germany',' Confirmed Cases');
+Group1Exe1Fun1(data{2},'lognormal','Log Normal',country{2,2},' Germany',' Deaths');
+Group1Exe1Fun1(data{3},'lognormal','Log Normal',country{3,1},' France',' Confirmed Cases');
+Group1Exe1Fun1(data{3},'lognormal','Log Normal',country{3,2},' France',' Deaths');
+Group1Exe1Fun1(data{4},'lognormal','Log Normal',country{4,1},' UK',' Confirmed Cases');
+Group1Exe1Fun1(data{4},'lognormal','Log Normal',country{4,2},' UK',' Deaths');
+Group1Exe1Fun1(data{5},'lognormal','Log Normal',country{5,1},' Italy',' Confirmed Cases');
+Group1Exe1Fun1(data{5},'lognormal','Log Normal',country{5,2},' Italy',' Deaths');
+Group1Exe1Fun1(data{6},'lognormal','Log Normal',country{6,1},' Spain',' Confirmed Cases');
+Group1Exe1Fun1(data{6},'lognormal','Log Normal',country{6,2},' Spain',' Deaths');
+Group1Exe1Fun1(data{7},'lognormal','Log Normal',country{7,1},' Romania',' Confirmed Cases');
+Group1Exe1Fun1(data{7},'lognormal','Log Normal',country{7,2},' Romania',' Deaths');
+Group1Exe1Fun1(data{8},'lognormal','Log Normal',country{8,1},' Netherlands',' Confirmed Cases');
+Group1Exe1Fun1(data{8},'lognormal','Log Normal',country{8,2},' Netherlands',' Deaths');
+Group1Exe1Fun1(data{9},'lognormal','Log Normal',country{9,1},' Greece',' Confirmed Cases');
+Group1Exe1Fun1(data{9},'lognormal','Log Normal',country{9,2},' Greece',' Deaths');
+Group1Exe1Fun1(data{10},'lognormal','Log Normal',country{10,1},' Portugal',' Confirmed Cases');
+Group1Exe1Fun1(data{10},'lognormal','Log Normal',country{10,2},' Portugal',' Deaths');
+Group1Exe1Fun1(data{11},'lognormal','Log Normal',country{11,1},' Belgium',' Confirmed Cases');
+Group1Exe1Fun1(data{11},'lognormal','Log Normal',country{11,2},' Belgium',' Deaths');
+Group1Exe1Fun1(data{12},'lognormal','Log Normal',country{12,1},' Czechia',' Confirmed Cases');
+Group1Exe1Fun1(data{12},'lognormal','Log Normal',country{12,2},' Czechia',' Deaths');
+Group1Exe1Fun1(data{13},'lognormal','Log Normal',country{13,1},' Hungary',' Confirmed Cases');
+Group1Exe1Fun1(data{13},'lognormal','Log Normal',country{13,2},' Hungary',' Deaths');
+Group1Exe1Fun1(data{14},'lognormal','Log Normal',country{14,1},' Sweden',' Confirmed Cases');
+Group1Exe1Fun1(data{14},'lognormal','Log Normal',country{14,2},' Sweden',' Deaths');
 
-
-
+clc;
+disp(newline);
+disp("The 15 most populous European countries were selected to examine the Log-Normal fitting");
+disp("(Belarus and Ukraine were exluded due to inaccurate data)");
+disp(newline);
+disp("In figures 1,2 the MSE is presented for confirmed cases and deaths respectively");
+disp("It appears that Log-Normal fits best for data from countries with large population")
+disp(newline);
 
 
 

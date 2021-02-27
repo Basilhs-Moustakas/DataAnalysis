@@ -45,21 +45,21 @@ for i=1:length(strings_array)
     b(:,i) = regress(deaths',X{i});
     estimated_deaths_total{i} = X{i}*b(:,i);
 end
-
+errors_total=zeros(1,length(strings_array));
 for i=1:length(strings_array)
-    B1 = ridge(countries{i,2}(1+20:end)',X{i}(:,2:end),5,0);
-    estimated_deaths_ridge{i} = B1(1) + X{i}(:,2:end)*B1(2:end);
+        errors_total(i) = immse(estimated_deaths_total{i},countries{i,2}(1+20:end)');
 end
+
 
 errors_one_variable=zeros(1,length(strings_array));
 X = cell(length(strings_array),1);
 for i=1:length(strings_array)
-    if i==1 tau=18;
-    elseif i==2 tau=13;
-    elseif i==3 tau=0;
-    elseif i==4 tau=6;
-    elseif i==5 tau=7;
-    elseif i==6 tau=5;
+    if i==1 tau=20;
+    elseif i==2 tau=14;
+    elseif i==3 tau=1;
+    elseif i==4 tau=4;
+    elseif i==5 tau=5;
+    elseif i==6 tau=4;
     end
     confirmed = countries{i,1}(1:end-tau);
     deaths = countries{i,2}(1+tau:end);
@@ -70,13 +70,7 @@ for i=1:length(strings_array)
 end
 
 
-errors_total=zeros(1,length(strings_array));
-errors_ridge=zeros(1,length(strings_array));
-for i=1:length(strings_array)
-        errors_total(i) = immse(estimated_deaths_total{i},countries{i,2}(1+20:end)');
-        errors_ridge(i) = immse(estimated_deaths_ridge{i},countries{i,2}(1+20:end)');
-end
-
+B_lasso = [];
 for i=1:length(strings_array)
     X{i} = ones(length(countries{i,1}(1+tau:end-20+tau)),1);
     for tau=0:20
@@ -85,11 +79,10 @@ for i=1:length(strings_array)
     B2 = lasso(X{i}(:,2:end),countries{i,2}(1+20:end),'Lambda',1e-03);
     estimated_deaths_lasso = X{i}(:,2:end)*B2;
     errors_lasso(i) = immse(estimated_deaths_lasso,countries{i,2}(1+20:end)');
+    B_lasso = [B_lasso B2];
 end
-% errors_total
-% errors_ridge
-% errors_one_variable
-errors = [errors_total ; errors_ridge ; errors_one_variable];
+
+errors = [errors_total ; errors_lasso ; errors_one_variable];
 figure()
 X = categorical({'Russia','Germany','UK','Italy','Spain','Netherlands'});
 X = reordercats(X,{'Russia','Germany','UK','Italy','Spain','Netherlands'});
@@ -100,18 +93,23 @@ hb(1).FaceColor = my_colors(10,:);
 hb(2).FaceColor = my_colors(25,:);
 hb(3).FaceColor = my_colors(40,:);
 
-legend('Using All Data','Using Ridge Regression','Using Data from exercise 4','Location','northwest')
-title('Errors with Different Regression Methods','FontSize',14 ) 
-ylabel('Mean Square Error','FontSize',14 )
+legend('Using All Data','Using Lasso Regression','Using Data from exercise 4','Location','northwest')
+title('Errors with Different Regression Methods', 'interpreter','latex','FontSize',14 ) 
+ylabel('Mean Square Error', 'interpreter','latex','FontSize',14 )
 grid on;
-
 
 % for c=1:6
 % figure
 % scatter(countries{c,2}(1+20:end),estimated_deaths_total{c})
 % hold on
 % plot(countries{c,2}(1+20:end),countries{c,2}(1+20:end))
-% xlabel('Actual deaths')
-% ylabel('Predicted deaths')
+% legend('Predicted deaths','Actual deaths');
+% title(strings_array(c),'FontSize',16 ) 
 % hold off
 % end
+
+clc;
+disp("From figure 1 it appears that both multiple linear regression and Lasso regression");
+disp("Significantly decrease the produced MSE relative to single linear regression");
+
+

@@ -1,13 +1,11 @@
 close all;
-% Deaths = readtable('Covid19Deaths.xlsx');
-% Confirmed = readtable('Covid19Confirmed.xlsx');
+
 Italy_deaths = load("italy_deaths.mat");
 Italy_deaths = Italy_deaths.Italy_deaths;
 Italy_confirmed = load("italy_confirmed.mat");
 Italy_confirmed = Italy_confirmed.Italy_confirmed;
 deaths = Italy_deaths(1,4:end);
 confirmed = Italy_confirmed(1,4:end);
-
 
 last_day = 193;
 
@@ -26,58 +24,78 @@ for i=1:length(confirmed_first_wave_array)
         confirmed_first_wave_array(i) = -confirmed_first_wave_array(i);
     end
 end
-sum1=0;
-for i=1:length(confirmed_first_wave_array)
-    sum1 = sum1+confirmed_first_wave_array(i);
+
+
+confirmed_first_wave_array = movmean(confirmed_first_wave_array,[6 0]);
+for k=1:length(confirmed_first_wave_array)
+     confirmed_first_wave_array(k) = floor(confirmed_first_wave_array(k));
+end
+deaths_first_wave_array = movmean(deaths_first_wave_array,[6 0]);
+for k=1:length(deaths_first_wave_array)
+     deaths_first_wave_array(k) = floor(deaths_first_wave_array(k));
 end
 
-normalized_confirmed = confirmed_first_wave_array / sum1;
-
-sum2=0;
-for i=1:length(deaths_first_wave_array)
-    sum2 = sum2+deaths_first_wave_array(i);
-end
-
-%deaths_first_wave_array = deaths_first_wave_array / sum2;
-
-figure
-bar(deaths_first_wave_array);
-title('Moufa Psofoi');
-figure
-bar(confirmed_first_wave_array);
-title('Moufa Gripes');
 
 data = 1:length(confirmed_first_wave_array);
 
-normalized_deaths = deaths_first_wave_array/sum2;
 
 %% Deaths - MSE
 
-err_fitted_deaths_gev = MSE('generalized extreme value',deaths_first_wave_array,data);
-err_fitted_deaths_lognormal = MSE('lognormal',deaths_first_wave_array,data);
-err_fitted_deaths_log_logistic = MSE('log logistic',deaths_first_wave_array,data);
-err_fitted_deaths_normal = MSE('normal',deaths_first_wave_array,data);
-err_fitted_deaths_birnsaund = MSE('birnbaumsaunders',deaths_first_wave_array,data);
+err_fitted_deaths_gev = Group1Exe1Fun2('generalized extreme value',deaths_first_wave_array,data);
+err_fitted_deaths_lognormal = Group1Exe1Fun2('lognormal',deaths_first_wave_array,data);
+err_fitted_deaths_log_logistic = Group1Exe1Fun2('log logistic',deaths_first_wave_array,data);
+err_fitted_deaths_normal = Group1Exe1Fun2('normal',deaths_first_wave_array,data);
+err_fitted_deaths_birnsaund = Group1Exe1Fun2('birnbaumsaunders',deaths_first_wave_array,data);
 
-Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',deaths_first_wave_array,'Italy',' ');
-Corona_Plot(data,'lognormal','Log Normal',deaths_first_wave_array,'Italy',' ');
-Corona_Plot(data,'log logistic','Log Logistic',deaths_first_wave_array,'Italy',' ');
-Corona_Plot(data,'normal','Normal',deaths_first_wave_array,'Italy',' ');
-Corona_Plot(data,'birnbaumsaunders','Birnbaum-Saunders',deaths_first_wave_array,'Italy',' ');
+Group1Exe1Fun1(data,'generalized extreme value','Generalized Extreme Value',deaths_first_wave_array,'Deaths',' - Generalized Extreme Value');
+Group1Exe1Fun1(data,'lognormal','Log Normal',deaths_first_wave_array,'Deaths',' - Log-Normal');
+Group1Exe1Fun1(data,'log logistic','Log Logistic',deaths_first_wave_array,'Deaths',' - Log-Logistic');
+Group1Exe1Fun1(data,'normal','Normal',deaths_first_wave_array,'Deaths',' - Normal');
+Group1Exe1Fun1(data,'birnbaumsaunders','Birnbaum-Saunders',deaths_first_wave_array,'Deaths',' - Birnbaum-Saunders');
 
 %% Confirmed - MSE
 
-err_fitted_confirmed_gev = MSE('generalized extreme value',confirmed_first_wave_array,data);
-err_fitted_confirmed_lognormal = MSE('lognormal',confirmed_first_wave_array,data);
-err_fitted_confirmed_log_logistic =  MSE('log logistic',confirmed_first_wave_array,data);
-err_fitted_confirmed_normal = MSE('normal',confirmed_first_wave_array,data);
-err_fitted_confirmed_birnsaund = MSE('birnbaumsaunders',confirmed_first_wave_array,data);
+err_fitted_confirmed_gev = Group1Exe1Fun2('generalized extreme value',confirmed_first_wave_array,data);
+err_fitted_confirmed_lognormal = Group1Exe1Fun2('lognormal',confirmed_first_wave_array,data);
+err_fitted_confirmed_log_logistic =  Group1Exe1Fun2('log logistic',confirmed_first_wave_array,data);
+err_fitted_confirmed_normal = Group1Exe1Fun2('normal',confirmed_first_wave_array,data);
+err_fitted_confirmed_birnsaund = Group1Exe1Fun2('birnbaumsaunders',confirmed_first_wave_array,data);
 
-Corona_Plot(data,'generalized extreme value','Generalized Extreme Value',confirmed_first_wave_array,'Italy',' ');
-Corona_Plot(data,'lognormal','Log Normal',confirmed_first_wave_array,'Italy',' ');
-Corona_Plot(data,'log logistic','Log Logistic',confirmed_first_wave_array,'Italy',' ');
-Corona_Plot(data,'normal','Normal',confirmed_first_wave_array,'Italy',' ');
-Corona_Plot(data,'birnbaumsaunders','Birnbaum-Saunders',confirmed_first_wave_array,'Italy',' ');
+Group1Exe1Fun1(data,'generalized extreme value','Generalized Extreme Value',confirmed_first_wave_array,'Confirmed Cases',' - Generalized Extreme Value');
+Group1Exe1Fun1(data,'lognormal','Log Normal',confirmed_first_wave_array,'Confirmed Cases',' - Log-Normal');
+Group1Exe1Fun1(data,'log logistic','Log Logistic',confirmed_first_wave_array,'Confirmed Cases',' - Log-Logistic');
+Group1Exe1Fun1(data,'normal','Normal',confirmed_first_wave_array,'Confirmed Cases',' - Normal');
+Group1Exe1Fun1(data,'birnbaumsaunders','Birnbaum-Saunders',confirmed_first_wave_array,'Confirmed Cases',' - Birnbaum-Saunders');
+
+clc;
+disp(newline + "For a more precise data-handling the moving average technique for 7 days was implemented in the initial data");
+
+str = newline + "MSE for various distributions (Confirmed Cases)";
+str = str + newline + "  -Log-Normal                 " + err_fitted_confirmed_lognormal;
+str = str + newline + "  -Generalized extreme value  " + err_fitted_confirmed_gev;
+str = str + newline + "  -Birnbaum–Saunders          " + err_fitted_confirmed_birnsaund;
+str = str + newline + "  -Log Logistic               " + err_fitted_confirmed_log_logistic;
+str = str + newline + "  -Normal                     " + err_fitted_confirmed_normal;
+disp(str)
+
+str = newline + "MSE for various distributions (Deaths)";
+str = str + newline + "  -Birnbaum–Saunders          " + err_fitted_deaths_birnsaund;
+str = str + newline + "  -Log-Normal                 " + err_fitted_deaths_lognormal;
+str = str + newline + "  -Generalized extreme value  " + err_fitted_deaths_gev;
+str = str + newline + "  -Log Logistic               " + err_fitted_deaths_log_logistic;
+str = str + newline + "  -Normal                     " + err_fitted_deaths_normal;
+disp(str)
+
+disp(newline);
+
+disp("The minimum MSE for the confirmed cases seems to be achieved by using the Log-Normal distribution.");
+disp("However, the Birnbaum-Saunders distribution produces a smaller MSE when fitting for deaths. Nevertheless,");
+disp("Log-Normal fitting is considered sufficient for daily deaths, since the difference between the MSE ");
+disp("of the two distributions is negligible");
+
+disp(newline);
+
+
 
 
 

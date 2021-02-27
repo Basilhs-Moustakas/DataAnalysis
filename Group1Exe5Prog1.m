@@ -60,12 +60,6 @@ for i=1:length(strings_array)
 end
 days_delay=days_delay-1;
 
-% tau=18;
-% c=4;
-% plot(countries{c,1}(1:end-tau),estimated_deaths{1+tau,c})
-% hold on
-% scatter(countries{c,1}(1:end-tau),countries{c,2}(1+tau:end))
-
 
 %% Plots
 
@@ -78,9 +72,9 @@ hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
 end
-title('Russia','FontSize',16 ) 
-ylabel('Mean Square Error','FontSize',14 )
-xlabel('Days Difference','FontSize',14 )
+title('Russia', 'interpreter','latex','FontSize',16 ) 
+ylabel('Mean Square Error', 'interpreter','latex','FontSize',14 )
+xlabel('Days Difference', 'interpreter','latex','FontSize',14 )
 grid on;
 
 figure()
@@ -92,9 +86,9 @@ hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
 end
-title('Germany','FontSize',16 ) 
-ylabel('Mean Square Error','FontSize',14 )
-xlabel('Days Difference','FontSize',14 )
+title('Germany', 'interpreter','latex','FontSize',16 ) 
+ylabel('Mean Square Error', 'interpreter','latex','FontSize',14 )
+xlabel('Days Difference', 'interpreter','latex','FontSize',14 )
 grid on;
 
 figure()
@@ -106,9 +100,9 @@ hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
 end
-title('United Kingdom','FontSize',16 ) 
-ylabel('Mean Square Error','FontSize',14 )
-xlabel('Days Difference','FontSize',14 )
+title('United Kingdom', 'interpreter','latex','FontSize',16 ) 
+ylabel('Mean Square Error', 'interpreter','latex','FontSize',14 )
+xlabel('Days Difference', 'interpreter','latex','FontSize',14 )
 grid on;
 
 figure()
@@ -120,9 +114,9 @@ hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
 end
-title('Italy','FontSize',16 ) 
-ylabel('Mean Square Error','FontSize',14 )
-xlabel('Days Difference','FontSize',14 )
+title('Italy', 'interpreter','latex','FontSize',16 ) 
+ylabel('Mean Square Error', 'interpreter','latex','FontSize',14 )
+xlabel('Days Difference', 'interpreter','latex','FontSize',14 )
 grid on;
 
 figure()
@@ -134,9 +128,9 @@ hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
 end
-title('Spain','FontSize',16 ) 
-ylabel('Mean Square Error','FontSize',14 )
-xlabel('Days Difference','FontSize',14 )
+title('Spain', 'interpreter','latex','FontSize',16 ) 
+ylabel('Mean Square Error', 'interpreter','latex','FontSize',14 )
+xlabel('Days Difference', 'interpreter','latex','FontSize',14 )
 grid on;
 
 figure()
@@ -148,9 +142,9 @@ hb.FaceColor = 'flat';
 for i=1:21
 hb.CData(i,:) = my_colors(3*i,:);
 end
-title('Netherlands','FontSize',16 ) 
-ylabel('Mean Square Error','FontSize',14 )
-xlabel('Days Difference','FontSize',14 )
+title('Netherlands', 'interpreter','latex','FontSize',16 ) 
+ylabel('Mean Square Error', 'interpreter','latex','FontSize',14 )
+xlabel('Days Difference', 'interpreter','latex','FontSize',14 )
 grid on;
 
 
@@ -205,7 +199,57 @@ hb.CData(6,:) = my_colors(10,:);
 % hb.CData(i,:) = my_colors(3*i,:);
 % end
 
-title('Days Delay for Minimum Error','FontSize',16 ) 
-ylabel('Days','FontSize',14 )
+title('Days Delay for Minimum Error', 'interpreter','latex','FontSize',16 ) 
+ylabel('Days', 'interpreter','latex','FontSize',14 )
 grid on;
+
+
+tau_best=days_delay;
+for c=1:6
+figure
+scatter(countries{c,2}(1+tau_best(c):end),estimated_deaths{tau_best(c)+1,c})
+hold on
+plot(countries{c,2}(1+tau_best(c):end),countries{c,2}(1+tau_best(c):end),'LineWidth',1.5, 'Color','m')
+legend('Predicted deaths','Actual deaths');
+title(strings_array(c), 'interpreter','latex','FontSize',16 ) 
+grid on;
+hold off
+end
+
+
+
+
+clc;
+disp("In figures 1-6 the MSE for various hysteresis and countries is presented.");
+disp("The hysteresis for which the MSE is minimized seem to agree with previous");
+disp("results from excercises 3 and 4.");
+disp(newline);
+str = "Country    " + "   Days Delay   " + "  MSE";
+str = str + newline + "--------------------------------------";
+str = str + newline + "Russia        " + days_delay(1) +"              " + errors(1+days_delay(1),1);
+str = str + newline + "Germany       " + days_delay(2) +"              "+ errors(1+days_delay(2),2);
+str = str + newline + "UK            " + days_delay(3) +"              "+ errors(1+days_delay(3),3);
+str = str + newline + "Italy         " + days_delay(4) +"               "+ errors(1+days_delay(4),4);
+str = str + newline + "Spain         " + days_delay(5) +"              "+ errors(1+days_delay(5),5);
+str = str + newline + "Netherlands   " + days_delay(6) +"                "+ errors(1+days_delay(6),6);
+disp(str);
+disp(newline);
+disp("As obvious from the above table, for Russia and UK the minimum MSE is");
+disp("significantly higher than the rest. This agrees with figures 8 and 10");
+disp("where significant errors are produced.");
+disp("From figures 8-13 we can observe that a rough estimation of daily deaths ");
+disp("is possible using the hysteresis with the smallest MSE for each country.");
+disp(newline);
+disp("Although the MSE metric appears to be sufficient for selecting the optimal");
+disp("delay for each country, it does not provide enough information to compare");
+disp("The models efficiency for different countries. For example, while the");
+disp("minimum MSE for Netherlands is less than the one of Italy, from figures 11");
+disp("and 13 we can observe that the model has adapted better for the Italian data.");
+
+
+
+
+
+
+
 
