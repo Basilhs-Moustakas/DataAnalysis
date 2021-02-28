@@ -35,6 +35,7 @@ countries{6,2} = country{8,2};
 
 estimated_deaths = cell(21,number_of_countries);
 
+%% Fitting simple linear regression models for various hystereses
 
 for tau=0:20
 X = cell(length(strings_array),1);
@@ -48,7 +49,7 @@ X = cell(length(strings_array),1);
 end
 
 errors = zeros(21,number_of_countries);
-
+%% MSE for various hystereses
 for i=1:length(strings_array)
     for tau=0:20
         errors(tau+1,i) = immse(estimated_deaths{tau+1,i},countries{i,2}(1+tau:end)');
@@ -57,6 +58,7 @@ end
 
 days_delay=zeros(1,number_of_countries);
 
+%% Selecting the best-fit hysteresis 
 for i=1:length(strings_array)
     [~,days_delay(i)] = min(errors(:,i));
 end

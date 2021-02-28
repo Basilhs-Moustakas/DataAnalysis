@@ -7,6 +7,8 @@ country = load("countries_second_wave.mat");
 countries = country.countries_second_wave;
 
 
+
+%% Calculating moving average for 3 days and flooring for second wave
 for i=1:6
     for j=1:2
         countries{i,j} = movmean(countries{i,j},[2 0]);
@@ -36,6 +38,8 @@ country_first{6,2} = country_first{8,2};
 
 strings_array = ["Russia","Germany","UK","Italy","Spain","Netherlands"];
 
+%% Calculating moving average for 3 days and flooring for first wave
+
 for i=1:6
     for j=1:2
         country_first{i,j} = movmean(country_first{i,j},[2 0]);
@@ -46,6 +50,7 @@ for i=1:6
 end
 
 
+%% Multiple regression for first wave MSE
 for i=1:6
     deaths = country_first{i,2}(1+20:end);
     X{i} = ones(length(deaths),1);
@@ -56,6 +61,9 @@ for i=1:6
     estimated_deaths_first{i} = X{i}*B;
 end
 
+
+
+%% Training Multiple regression model with standardized data
 b = zeros(22,6);
 X = cell(6,1);
 for i=1:6
@@ -67,6 +75,7 @@ for i=1:6
     b(:,i) = regress(deaths',X{i});
 end
 
+%% Deaths estimation for the second wave using standardized multiple regression model
 X = cell(6,1);
 estimated_deaths=cell(6,1);
 for i=1:6
@@ -95,7 +104,7 @@ for i=1:6
     stddevs_deaths(i) = std(country_first{i,2});
 end
 
-
+%% MSE calculation for both waves
 for i=1:6
     errors(1,i) = immse(estimated_deaths_first{1,i},country_first{i,2}(1+20:end)');
     errors(2,i) = immse(estimated_deaths{i,1},countries{i,2}(1+20:end)');

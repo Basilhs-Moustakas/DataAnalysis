@@ -6,11 +6,15 @@ clear all;
 country = load("country.mat");
 country = country.country;
 difference_maxima=zeros(1,14);
+
+%% Calculating delay between maxima
 for i=1:14
     difference_maxima(i) = Group1Exe3Fun1(country{i,1},country{i,2});
     
 end
 
+
+%% Calculating confidence intervals with parametric and bootstrap methods
 alpha = 0.05;
 
 m_bootstrap = bootci(1000,{@mean,difference_maxima(1:13)},'alpha',alpha);

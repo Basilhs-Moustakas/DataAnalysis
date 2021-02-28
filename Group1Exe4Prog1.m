@@ -38,6 +38,7 @@ countries{5,2} = country{6,2};
 countries{6,1} = country{8,1};
 countries{6,2} = country{8,2};
 
+%% Calculating Pearson coefficient matrix
 for j=1:length(strings_array)
     coeff_matrix = zeros(1,length(strings_array));
     for i=-20:20
@@ -49,6 +50,7 @@ for j=1:length(strings_array)
             coeff_matrix(i+21)= temp(1,2);
         end
     end
+    %% Selecting the delay of maximum correlation
     [~,tau] = max(coeff_matrix);
     tau_of_max_correlation(j) = tau - 21;   
 end
@@ -98,7 +100,7 @@ hb.CData(5,:) = my_colors(20,:);
 hb.CData(6,:) = my_colors(10,:);
 
 
-title('Maximum Correleation - Days Difference', 'interpreter', 'latex','FontSize',16 ) 
+title('Maximum Correlation - Days Difference', 'interpreter', 'latex','FontSize',16 ) 
 ylabel('Days', 'interpreter', 'latex','FontSize',14 )
 grid on;
 
@@ -112,6 +114,8 @@ data = cell(length(strings_array),1);
 for i=1:length(strings_array)
     data{i} = 1:length(country{i,1});
 end
+
+%% Same as above, but for all countries
 
 for j=1:length(strings_array)
     coeff_matrix = zeros(1,length(strings_array));
@@ -176,7 +180,7 @@ hb.CData(12,:) = my_colors(19,:);
 hb.CData(13,:) = my_colors(15,:);
 hb.CData(14,:) = my_colors(11,:);
 
-title('Maximum Correleation - Days Difference', 'interpreter', 'latex','FontSize',16 ) 
+title('Maximum Correlation - Days Difference', 'interpreter', 'latex','FontSize',16 ) 
 ylabel('Days', 'interpreter', 'latex','FontSize',14 )
 grid on;
 

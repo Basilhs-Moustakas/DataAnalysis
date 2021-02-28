@@ -38,6 +38,7 @@ estimated_deaths_ridge = cell(number_of_countries,1);
 
 b = zeros(22,length(strings_array));
 X = cell(length(strings_array),1);
+%% Multiple regression 
 for i=1:length(strings_array)
     deaths = countries{i,2}(1+20:end);
     X{i} = ones(length(deaths),1);
@@ -52,11 +53,11 @@ for i=1:length(strings_array)
         errors_total(i) = immse(estimated_deaths_total{i},countries{i,2}(1+20:end)');
 end
 
-
+%% Simple linear regression
 errors_one_variable=zeros(1,length(strings_array));
 X = cell(length(strings_array),1);
 for i=1:length(strings_array)
-    if i==1 tau=20;
+    if i==1 tau=20;    % Days delay data from exercise 4
     elseif i==2 tau=14;
     elseif i==3 tau=1;
     elseif i==4 tau=4;
@@ -71,7 +72,7 @@ for i=1:length(strings_array)
     errors_one_variable(i) = immse(estimated_deaths{i},deaths');
 end
 
-
+%% Lasso regression
 B_lasso = [];
 for i=1:length(strings_array)
     X{i} = ones(length(countries{i,1}(1+tau:end-20+tau)),1);

@@ -3,6 +3,8 @@
 
 close all;
 
+%% Initializing matrices
+
 Italy_deaths = load("italy_deaths.mat");
 Italy_deaths = Italy_deaths.Italy_deaths;
 Italy_confirmed = load("italy_confirmed.mat");
@@ -28,7 +30,7 @@ for i=1:length(confirmed_first_wave_array)
     end
 end
 
-
+%% Calculating 7-day moving average 
 confirmed_first_wave_array = movmean(confirmed_first_wave_array,[6 0]);
 for k=1:length(confirmed_first_wave_array)
      confirmed_first_wave_array(k) = floor(confirmed_first_wave_array(k));
