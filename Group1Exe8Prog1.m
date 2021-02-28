@@ -143,12 +143,12 @@ disp("seems to achieve moderately accurate predictions for the second wave as we
 disp(newline);
 str = "Country      " + "  First wave MSE  " + "  Second wave MSE";
 str = str + newline + "------------------------------------------------";
-str = str + newline + "Russia       " + "   " + errors(1,1) + "         " + errors(2,1);
-str = str + newline + "Germany       " + "   " + errors(1,2) + "          " + errors(2,2);
+str = str + newline + "Russia       " + "   " + errors(1,1) + "          " + errors(2,1);
+str = str + newline + "Germany      " + "   " + errors(1,2) + "          " + errors(2,2);
 str = str + newline + "UK           " + "  " + errors(1,3) + "          " + errors(2,3);
-str = str + newline + "Italy        " + "   " + errors(1,4) + "         " + errors(2,4);
+str = str + newline + "Italy        " + "   " + errors(1,4) + "          " + errors(2,4);
 str = str + newline + "Spain        " + "  " + errors(1,5) + "         " + errors(2,5);
-str = str + newline + "Netherlands   " + "   " + errors(1,6) + "             " + errors(2,6);
+str = str + newline + "Netherlands  " + "   " + errors(1,6) + "           " + errors(2,6);
 disp(str);
 
 
