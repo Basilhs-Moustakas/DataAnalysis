@@ -1,5 +1,3 @@
-% VASILEIOS-PANAGIOTIS MOUSTAKAS 9424
-% ROMANOS VOULGARAKIS 9383
 close all;
 clear all;
  
@@ -45,35 +43,37 @@ for i=1:6
     end
 end
 
-X = cell(6,1);
-estimated_deaths_first=cell(6,1);
-for i=1:length(strings_array)
-    deaths = country_first{i,2}(1+20:end)';
+
+for i=1:6
+    deaths = country_first{i,2}(1+20:end);
+    X{i} = ones(length(deaths),1);
     for tau=0:20
         X{i} = [X{i}  country_first{i,1}(1+tau:end-20+tau)'];
     end
-    [~,~,~,~,beta,~] = plsregress(X{i},deaths,20);
-   estimated_deaths_first{i} = beta(1) + X{i}*beta(2:end);
+    B = regress(deaths',X{i});
+    estimated_deaths_first{i} = X{i}*B;
 end
 
 b = zeros(22,6);
 X = cell(6,1);
 for i=1:6
     deaths = (country_first{i,2}(1+20:end) - mean(country_first{i,2}(1+20:end)))/std(country_first{i,2}(1+20:end));
+    X{i} = ones(length(deaths),1);
     for tau=0:20
         X{i} = [X{i}  (country_first{i,1}(1+tau:end-20+tau)'-mean(country_first{i,1}(1+tau:end-20+tau)))/std(country_first{i,1}(1+tau:end-20+tau))];
     end
-    [~,~,~,~,b(:,i),~] = plsregress(X{i},deaths',20);
+    b(:,i) = regress(deaths',X{i});
 end
 
 X = cell(6,1);
 estimated_deaths=cell(6,1);
 for i=1:6
     deaths = (countries{i,2}(1+20:end));
+    X{i} = ones(length(deaths),1);
     for tau=0:20
         X{i} = [X{i}  ((countries{i,1}(1+tau:end-20+tau)')-mean(countries{i,1}(1+tau:end-20+tau)))/std(countries{i,1}(1+tau:end-20+tau))];
     end
-    estimated_deaths{i} = b(1,i) + X{i}*b(2:end,i);
+    estimated_deaths{i} = X{i}*b(:,i);
     for j=1:length(estimated_deaths{i})
         if j<21
             estimated_deaths{i}(j) = estimated_deaths{i}(j)*std(deaths(1:j)) + mean(deaths(1:j));
@@ -95,13 +95,13 @@ end
 
 
 for i=1:6
-    errors(1,i) = immse(estimated_deaths_first{i,1},country_first{i,2}(1+20:end)');
+    errors(1,i) = immse(estimated_deaths_first{1,i},country_first{i,2}(1+20:end)');
     errors(2,i) = immse(estimated_deaths{i,1},countries{i,2}(1+20:end)');
 end
 
 figure()
-X = categorical({'First wave','Second wave'});
-X = reordercats(X,{'First wave','Second wave'});
+X = categorical({'First wave - training set','Second wave - validation set'});
+X = reordercats(X,{'First wave - training set','Second wave - validation set'});
 Y = errors;
 hb=bar(X,Y);
     my_colors=colormap(bone);
@@ -127,26 +127,37 @@ grid on;
 hold off;
 legend('Actual deaths','Predicted deaths');
 title(strings_array(i), 'interpreter','latex','FontSize',16 ) 
+xlabel('Days','interpreter','latex','FontSize',14)
 end
 
 clc;
 disp("For better data handling the moving average technique for 3 days was implemented"); 
 disp(newline);
-disp("From figures 2-7 we can observe that PCR developed for the first wave");
+disp("From figures 2-7 we can observe that the model developed for the first wave");
 disp("seems to achieve moderately accurate predictions for the second wave as well.");
 disp(newline);
 str = "Country      " + "  First wave MSE  " + "  Second wave MSE";
 str = str + newline + "------------------------------------------------";
-str = str + newline + "Russia       " + "   " + errors(1,1) + "         " + errors(2,1);
-str = str + newline + "Germany       " + "   " + errors(1,2) + "          " + errors(2,2);
+str = str + newline + "Russia       " + "   " + errors(1,1) + "           " + errors(2,1);
+str = str + newline + "Germany      " + "   " + errors(1,2) + "          " + errors(2,2);
 str = str + newline + "UK           " + "  " + errors(1,3) + "          " + errors(2,3);
-str = str + newline + "Italy        " + "   " + errors(1,4) + "         " + errors(2,4);
+str = str + newline + "Italy        " + "   " + errors(1,4) + "          " + errors(2,4);
 str = str + newline + "Spain        " + "  " + errors(1,5) + "         " + errors(2,5);
-str = str + newline + "Netherlands   " + "   " + errors(1,6) + "             " + errors(2,6);
+str = str + newline + "Netherlands  " + "   " + errors(1,6) + "           " + errors(2,6);
 disp(str);
 
 
 disp(newline);
-disp("From figure 1 we can observe that when using PCR the MSE has minor difference");
-disp("compared to exercise 7");
+disp("As shown in figure 1, the MSE in the training set is significantly lower than the MSE in the validation set,")
+disp("which is expected. Due to the large difference in scale between the two waves, the fitted model does not")
+disp("produce in-scale predictions for the second wave. To correct that, both datasets were standardized,");
+disp("while performing inverse stardardization to calculate the predicted deaths.");
+disp("The mean used in inverse standardization is the moving average of the last 20 days before each prediction,");
+disp("while the standard deviation is calculated using every da
+
+
+
+
+
+
 

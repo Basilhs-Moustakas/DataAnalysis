@@ -1,3 +1,5 @@
+% VASILEIOS-PANAGIOTIS MOUSTAKAS 9424
+% ROMANOS VOULGARAKIS 9383
 function difference_est = Group1Exe3Fun1(country_data_confirmed,country_data_deaths)
 data=1:length(country_data_confirmed);
 pd = fitdist(data','lognormal','frequency',country_data_confirmed);

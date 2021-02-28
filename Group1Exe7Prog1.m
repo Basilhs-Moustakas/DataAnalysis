@@ -1,3 +1,5 @@
+% VASILEIOS-PANAGIOTIS MOUSTAKAS 9424
+% ROMANOS VOULGARAKIS 9383
 close all;
 clear all;
  
@@ -100,8 +102,8 @@ for i=1:6
 end
 
 figure()
-X = categorical({'First wave','Second wave'});
-X = reordercats(X,{'First wave','Second wave'});
+X = categorical({'First wave - training set','Second wave - validation set'});
+X = reordercats(X,{'First wave - training set','Second wave - validation set'});
 Y = errors;
 hb=bar(X,Y);
     my_colors=colormap(bone);
@@ -127,13 +129,14 @@ grid on;
 hold off;
 legend('Actual deaths','Predicted deaths');
 title(strings_array(i), 'interpreter','latex','FontSize',16 ) 
+xlabel('Days','interpreter','latex','FontSize',14)
 end
 
 clc;
 disp("For better data handling the moving average technique for 3 days was implemented"); 
 disp(newline);
 disp("From figures 2-7 we can observe that the model developed for the first wave");
-disp("seems to achieve sufficient predictions for the second wave as well.");
+disp("seems to achieve moderately accurate predictions for the second wave as well.");
 disp(newline);
 str = "Country      " + "  First wave MSE  " + "  Second wave MSE";
 str = str + newline + "------------------------------------------------";
@@ -147,10 +150,13 @@ disp(str);
 
 
 disp(newline);
-disp("As shown in figure 1, the MSE of the error produced by the model is comparable");
-disp("for the two waves. To achieve that we implemented standardization on the training");
-disp("set, while performing inverse stardardization to calculate the predicted deaths");
-disp("with data from the test set from 20 days before the next prediction.");
+disp("As shown in figure 1, the MSE in the training set is significantly lower than the MSE in the validation set,")
+disp("which is expected. Due to the large difference in scale between the two waves, the fitted model does not")
+disp("produce in-scale predictions for the second wave. To correct that, both datasets were standardized,")
+disp("while performing inverse stardardization to calculate the predicted deaths.")
+disp("The mean used in inverse standardization is the moving average of the last 20 days before each prediction,")
+disp("while the standard deviation is calculated using all of data from previous days.")
+disp("Even better prediction accuracy could be achieved if the standard deviation of the second wave was considered known.")
 
 
 

@@ -1,3 +1,5 @@
+% VASILEIOS-PANAGIOTIS MOUSTAKAS 9424
+% ROMANOS VOULGARAKIS 9383
 close all;
  
 country = load("country.mat");
@@ -75,7 +77,7 @@ hb.CData(12,:) = my_colors(16,:);
 hb.CData(13,:) = my_colors(12,:);
 hb.CData(14,:) = my_colors(8,:);
 
-title('Confirmed Cases','FontSize',16 ) 
+title('Confirmed Cases','interpreter','latex','FontSize',16 ) 
 ylabel('Mean Square Error - Log Normal','FontSize',14 )
 grid on;
 

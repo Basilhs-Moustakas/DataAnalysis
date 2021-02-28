@@ -1,3 +1,5 @@
+% VASILEIOS-PANAGIOTIS MOUSTAKAS 9424
+% ROMANOS VOULGARAKIS 9383
 close all;
 clear all;
 
@@ -51,5 +53,5 @@ disp(newline);
 disp("Sweden was excluded from the calculations, due to ");
 disp("the unrealistic result for the days difference between the maxima");
 disp(newline);
-
-
+disp("It appears that for either method of confidence interval calculation, 14 days is not an acceptable estimate");
+disp("of the delay between the maxima.");

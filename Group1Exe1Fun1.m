@@ -1,3 +1,5 @@
+% VASILEIOS-PANAGIOTIS MOUSTAKAS 9424
+% ROMANOS VOULGARAKIS 9383
 function [] = Group1Exe1Fun1(data,distribution,Title,array,country,data_type)
 sum=0;
 for i=1:length(array)
